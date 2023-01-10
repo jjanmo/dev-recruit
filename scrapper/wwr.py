@@ -23,9 +23,9 @@ def extract_jobs(keyword):
                 position = item.find('span', class_="title").text
                 link = item.find_all('a')[1].attrs['href']
                 logo = None
-                logoEle = item.find_all('a')[0].find('div', class_="flag-logo")
-                if logoEle is not None:
-                    logo = logoEle['style'].split('(')[1].split(')')[0]
+                logo_elem = item.find_all('a')[0].find('div', class_="flag-logo")
+                if logo_elem is not None:
+                    logo = logo_elem['style'].split('(')[1].split(')')[0]
 
                 result = {
                     'company': company.text,
