@@ -29,10 +29,10 @@ def extract_jobs(keyword):
 
                 result = {
                     'company': company.text,
-                    'job_type': job_type.text,
-                    'region': region.text,
+                    'location': region.text,
                     'position': position,
                     'link': f'{WWR_BASE_URL}{link}',
+                    'job_type': job_type.text,
                     'logo': logo
                 }
                 results.append(result)
