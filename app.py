@@ -12,8 +12,16 @@ def hello_world():
 
     wwr_jobs = extract_wwr_job(keyword)
     indeed_jobs = extract_indeed_job(keyword)
+    jobs = wwr_jobs + indeed_jobs
 
-    return wwr_jobs + indeed_jobs
+    file = open(f'{keyword}.csv', 'w')
+    file.write('Position, Company, Location, Link \n')
+
+    for job in jobs:
+        file.write(f'{job["position"]}, {job["company"]}, {job["location"]}, {job["link"]} \n')
+    file.close()
+
+    return 'hello world'
 
 
 if __name__ == '__main__':

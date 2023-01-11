@@ -28,11 +28,11 @@ def extract_wwr_job(keyword):
                     logo = logo_elem['style'].split('(')[1].split(')')[0]
 
                 result = {
-                    'company': company.text,
-                    'location': region.text,
+                    'company': company.string.replace(',', ' '),
+                    'location': region.string.replace(',', ' '),
                     'position': position,
                     'link': f'{WWR_BASE_URL}{link}',
-                    'job_type': job_type.text,
+                    'job_type': job_type.string.replace(',', ' '),
                     'logo': logo
                 }
                 results.append(result)
