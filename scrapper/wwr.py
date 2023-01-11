@@ -5,7 +5,7 @@ WWR_BASE_URL = 'https://weworkremotely.com'
 REQUEST_URL = f'{WWR_BASE_URL}/remote-jobs/search?term='
 
 
-def extract_jobs(keyword):
+def extract_wwr_job(keyword):
     response = get(f'{REQUEST_URL}{keyword}')
     results = []
 
