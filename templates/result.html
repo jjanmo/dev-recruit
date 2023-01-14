@@ -10,7 +10,11 @@
 </head>
 <body>
 <main class="container">
-    <h1>Result about "{{keyword}}"</h1>
+    <hgroup>
+        <h1 style="position: relative;">Result about "{{keyword}}" <a href="/" style="position: absolute; right: 0">←
+            Back </a></h1>
+        <a href="/export?keyword={{keyword}}" target="_blank">Export CSV</a>
+    </hgroup>
     <table role="grid">
         <thead>
         <tr>

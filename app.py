@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, send_file
 from scrapper.wwr import extract_wwr_job
 from scrapper.indeed import extract_indeed_job
 from file import save_to_file
@@ -18,21 +18,34 @@ def home():
 @app.route('/result')
 def result():
     keyword = request.args.get('keyword')
+    if keyword == '' or keyword is None:
+        return redirect('/')
 
-    if keyword not in fake_db:
+    if keyword in fake_db:
+        jobs = fake_db[keyword]
+    else:
         wwr_jobs = extract_wwr_job(keyword)
         indeed_jobs = extract_indeed_job(keyword)
         jobs = wwr_jobs + indeed_jobs
-
         fake_db[keyword] = jobs
-    else:
-        jobs = fake_db[keyword]
 
     return render_template(
         'result.html', keyword=keyword,
         jobs=jobs,
         total_count=len(jobs)
     )
+
+
+@app.route('/export')
+def export():
+    keyword = request.args.get('keyword')
+    if keyword is None:
+        return redirect('/')
+    if keyword not in fake_db:
+        return redirect(f'/result?keyword={keyword}')
+
+    save_to_file(keyword, fake_db[keyword])
+    return send_file(f'{keyword}.csv', as_attachment=True)
 
 
 if __name__ == '__main__':
