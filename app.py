@@ -5,15 +5,11 @@ from file import save_to_file
 
 app = Flask(__name__)
 
+fake_db = {}
+
 
 @app.route('/')
 def home():
-    # keyword = input("What do you want to search for?")
-    #
-    # wwr_jobs = extract_wwr_job(keyword)
-    # indeed_jobs = extract_indeed_job(keyword)
-    # jobs = wwr_jobs + indeed_jobs
-    #
     # save_to_file(keyword, jobs)
 
     return render_template('home.html')
@@ -22,7 +18,21 @@ def home():
 @app.route('/result')
 def result():
     keyword = request.args.get('keyword')
-    return render_template('result.html', keyword=keyword)
+
+    if keyword not in fake_db:
+        wwr_jobs = extract_wwr_job(keyword)
+        indeed_jobs = extract_indeed_job(keyword)
+        jobs = wwr_jobs + indeed_jobs
+
+        fake_db[keyword] = jobs
+    else:
+        jobs = fake_db[keyword]
+
+    return render_template(
+        'result.html', keyword=keyword,
+        jobs=jobs,
+        total_count=len(jobs)
+    )
 
 
 if __name__ == '__main__':
