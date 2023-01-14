@@ -23,7 +23,7 @@ def get_page_count(keyword):
     soup = BeautifulSoup(source, 'html.parser')
     page_nav = soup.find('nav', attrs={'role': 'navigation'})
 
-    if page_nav is None:
+    if page_nav is None or len(list(page_nav.children)) == 0:
         return 1
     else:
         pages = list(page_nav.children)
