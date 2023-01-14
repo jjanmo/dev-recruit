@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, send_file
-from scrapper.wwr import extract_wwr_job
-from scrapper.indeed import extract_indeed_job
+from scraper.wwr import extract_wwr_job
+from scraper.indeed import extract_indeed_job
 from file import save_to_file
 
 app = Flask(__name__)
