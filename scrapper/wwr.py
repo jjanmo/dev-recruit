@@ -30,7 +30,7 @@ def extract_wwr_job(keyword):
                 result = {
                     'company': company.string.replace(',', ' '),
                     'location': region.string.replace(',', ' '),
-                    'position': position,
+                    'position': position.replace(',', ' '),
                     'link': f'{WWR_BASE_URL}{link}',
                     'job_type': job_type.string.replace(',', ' '),
                     'logo': logo
