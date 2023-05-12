@@ -14,13 +14,13 @@ def get_source(keyword, query_string=''):
     driver = webdriver.Chrome(options=options, service=ChromeService(ChromeDriverManager().install()))
     driver.get(f'{REQUEST_URL}{keyword}{query_string}')
     source = driver.page_source
-
     return source, driver
 
 
 def get_page_count(keyword):
     source, driver = get_source(keyword)
     soup = BeautifulSoup(source, 'html.parser')
+
     page_nav = soup.find('nav', attrs={'role': 'navigation'})
 
     if page_nav is None or len(list(page_nav.children)) == 0:

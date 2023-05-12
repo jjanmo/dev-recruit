@@ -10,8 +10,6 @@ fake_db = {}
 
 @app.route('/')
 def home():
-    # save_to_file(keyword, jobs)
-
     return render_template('home.html')
 
 
